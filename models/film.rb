@@ -41,6 +41,24 @@ class Film
     return customers.map { |film| Customer.new(film) }
   end
 
+  def remove_price_from_funds()
+    # Pull fee(s) from Moviestar
+    funds = customers().map {|cust| cust.funds.to_i}
+    # Calculation total fees
+    # total_fees = 0
+    # for fee in fees
+    #   total_fees += fee
+    # end
+  # or
+    # fees.each {| fee | total_fees += fee}
+  # or
+    # total_fees = fees.sum
+    # Movie Budget -= Total Fees
+    @budget -= total_fees
+
+    update()
+  end
+
   def self.delete_all()
     sql = "DELETE FROM films"
     SqlRunner.run(sql)

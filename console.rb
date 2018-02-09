@@ -71,6 +71,9 @@ Ticket.all()
 film2.customers()
 customer1.films()
 
+customer1.remove_price_from_funds()
+
+
 
 binding.pry
 nil
