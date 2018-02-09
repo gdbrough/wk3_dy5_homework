@@ -42,22 +42,15 @@ class Customer
   end
 
   def remove_price_from_funds()
-    # Pull fee(s) from Moviestar
     ticket_prices = films().map {|film| film.price.to_i}
-    # Calculation total fees
-    # total_fees = 0
-    # for fee in fees
-    #   total_fees += fee
-    # end
-  # or
-    # fees.each {| fee | total_fees += fee}
-  # or
     total_price = ticket_prices.sum
-    # Movie Budget -= Total Fees
-    p @funds
-    p total_price
     @funds -= total_price
     update()
+  end
+
+  def how_many_tickets()
+    ticket_count = films().count
+    return ticket_count
   end
 
   def self.delete_all()

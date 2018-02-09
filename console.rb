@@ -72,7 +72,7 @@ film2.customers()
 customer1.films()
 
 customer1.remove_price_from_funds()
-
+customer1.how_many_tickets()
 
 
 binding.pry
