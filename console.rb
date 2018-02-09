@@ -68,6 +68,9 @@ Ticket.all()
 # Customer.delete_all()
 # Ticket.delete_all()
 
+film2.customers()
+customer1.films()
+
 
 binding.pry
 nil
