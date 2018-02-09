@@ -61,8 +61,12 @@ ticket3.update()
 ticket7.delete()
 
 Film.all()
+Customer.all()
+Ticket.all()
 
 # Film.delete_all()
+# Customer.delete_all()
+# Ticket.delete_all()
 
 
 binding.pry
