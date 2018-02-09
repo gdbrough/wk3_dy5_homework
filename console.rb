@@ -60,6 +60,8 @@ ticket3.update()
 
 ticket7.delete()
 
+Film.all()
+
 # Film.delete_all()
 
 
