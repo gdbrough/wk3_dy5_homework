@@ -15,7 +15,11 @@ film4.save()
 film5 = Film.new({"title" => "Day After Tomorrow", "price" => 7})
 film5.save
 
+customer1 = Customer.new({"name" => "Bob McClumfer", "funds" => 20})
+customer1.save()
 
+ticket1 = Ticket.new({"customer_id" => customer1.id, "film_id" => film4.id})
+ticket1.save()
 
 
 
