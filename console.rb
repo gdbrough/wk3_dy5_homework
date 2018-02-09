@@ -29,23 +29,6 @@ customer5.save()
 customer6 = Customer.new({"name" => "Kenny Roberts", "funds" => 60})
 customer6.save()
 
-ticket1 = Ticket.new({"customer_id" => customer1.id, "film_id" => film1.id})
-ticket1.save()
-ticket2 = Ticket.new({"customer_id" => customer1.id, "film_id" => film2.id})
-ticket2.save()
-ticket3 = Ticket.new({"customer_id" => customer1.id, "film_id" => film3.id})
-ticket3.save()
-ticket4 = Ticket.new({"customer_id" => customer1.id, "film_id" => film4.id})
-ticket4.save()
-ticket5 = Ticket.new({"customer_id" => customer1.id, "film_id" => film5.id})
-ticket5.save()
-ticket6 = Ticket.new({"customer_id" => customer5.id, "film_id" => film2.id})
-ticket6.save()
-ticket7 = Ticket.new({"customer_id" => customer2.id, "film_id" => film2.id})
-ticket7.save()
-ticket8 = Ticket.new({"customer_id" => customer3.id, "film_id" => film2.id})
-ticket8.save()
-
 screening1 = Screening.new({"film_id" => film1.id, "start_time" => "10:00", "tickets_available" => 50})
 screening1.save()
 screening2 = Screening.new({"film_id" => film2.id, "start_time" => "17:30", "tickets_available" => 50})
@@ -57,6 +40,23 @@ screening4.save()
 screening5 = Screening.new({"film_id" => film4.id, "start_time" => "22:30", "tickets_available" => 50})
 screening5.save()
 
+ticket1 = Ticket.new({"customer_id" => customer1.id, "screening_id" => screening1.id})
+ticket1.save()
+# ticket2 = Ticket.new({"customer_id" => customer1.id, "film_id" => film2.id})
+# ticket2.save()
+# ticket3 = Ticket.new({"customer_id" => customer1.id, "film_id" => film3.id})
+# ticket3.save()
+# ticket4 = Ticket.new({"customer_id" => customer1.id, "film_id" => film4.id})
+# ticket4.save()
+# ticket5 = Ticket.new({"customer_id" => customer1.id, "film_id" => film5.id})
+# ticket5.save()
+# ticket6 = Ticket.new({"customer_id" => customer5.id, "film_id" => film2.id})
+# ticket6.save()
+# ticket7 = Ticket.new({"customer_id" => customer2.id, "film_id" => film2.id})
+# ticket7.save()
+# ticket8 = Ticket.new({"customer_id" => customer3.id, "film_id" => film2.id})
+# ticket8.save()
+
 film4.title = "Jaws"
 film4.update()
 
@@ -67,10 +67,10 @@ customer1.update()
 
 customer5.delete()
 
-ticket3.customer_id = customer3.id
-ticket3.update()
+ticket1.customer_id = customer3.id
+ticket1.update()
 
-ticket7.delete()
+# ticket7.delete()
 
 screening1.start_time = "15:00"
 screening1.update()
@@ -85,12 +85,12 @@ Ticket.all()
 # Customer.delete_all()
 # Ticket.delete_all()
 
-film2.customers()
-customer1.films()
-
-customer1.remove_price_from_funds()
-p customer1.how_many_tickets()
-p film2.how_many_customers()
+film1.customers()
+customer3.films()
+#
+# customer1.remove_price_from_funds()
+# p customer1.how_many_tickets()
+# p film2.how_many_customers()
 
 
 binding.pry

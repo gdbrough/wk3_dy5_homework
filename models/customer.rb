@@ -33,25 +33,26 @@ class Customer
   end
 
   def films()
-    sql = "SELECT films.* FROM films
-    INNER JOIN tickets ON films.id = tickets.film_id
-    WHERE tickets.customer_id = $1"
+    sql = "SELECT films.* FROM films, tickets, screenings
+    WHERE tickets.customer_id = $1
+    AND tickets.screening_id = screenings.id
+    AND screenings.film_id = films.id"
     values = [@id]
     customers = SqlRunner.run(sql, values)
     return customers.map { |film| Film.new(film) }
   end
 
-  def remove_price_from_funds()
-    ticket_prices = films().map {|film| film.price.to_i}
-    total_price = ticket_prices.sum
-    @funds -= total_price
-    update()
-  end
-
-  def how_many_tickets()
-    ticket_count = films().count
-    return ticket_count
-  end
+  # def remove_price_from_funds()
+  #   ticket_prices = films().map {|film| film.price.to_i}
+  #   total_price = ticket_prices.sum
+  #   @funds -= total_price
+  #   update()
+  # end
+  #
+  # def how_many_tickets()
+  #   ticket_count = films().count
+  #   return ticket_count
+  # end
 
   def self.delete_all()
     sql = "DELETE FROM customers"
