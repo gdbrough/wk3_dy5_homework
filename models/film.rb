@@ -33,10 +33,10 @@ class Film
   end
 
   def customers()
-    sql = "SELECT customers.* FROM customers, screenings, tickets
-    WHERE screenings.film_id = $1
-    and screenings.id = tickets.screening_id
-    and tickets.customer_id = customers.id;"
+    sql = "select customers.* from customers
+    inner join tickets on customers.id = tickets.customer_id
+    inner join screenings on tickets.screening_id = screenings.id
+    where screenings.film_id = $1"
     values = [@id]
     customers = SqlRunner.run(sql, values)
     return customers.map { |film| Customer.new(film) }
@@ -45,6 +45,22 @@ class Film
   def how_many_customers()
     customer_count = customers().count
     return customer_count
+  end
+
+  def most_popular_time()
+    sql = "select screenings.* from screenings
+    where screenings.id in (
+      select screenings.id from screenings where screenings.film_id = $1
+    )
+    and screenings.id in (
+      select tickets.screening_id from tickets
+      group by screening_id
+      order by count(screening_id)
+      desc limit 1
+    )"
+    values = [@id]
+    most_popular_time = SqlRunner.run(sql, values)
+    return most_popular_time.map { |time| time }
   end
 
   def self.delete_all()
@@ -57,7 +73,5 @@ class Film
     films = SqlRunner.run(sql)
     return films.map { |film| Film.new(film) }
   end
-
-
 
 end

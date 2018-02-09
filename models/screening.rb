@@ -33,4 +33,30 @@ class Screening
     SqlRunner.run(sql, values)
   end
 
+  def customers()
+    sql = "select customers.* from customers
+    inner join tickets on customers.id = tickets.customer_id
+    inner join screenings on tickets.screening_id = screenings.id
+    where screenings.id = $1"
+    values = [@id]
+    customers = SqlRunner.run(sql, values)
+    return customers.map { |film| Customer.new(film) }
+  end
+
+  def deduct_from_available_tickets()
+    @tickets_available -= customers().count
+    update()
+  end
+
+  def self.delete_all()
+    sql = "DELETE FROM screenings"
+    SqlRunner.run(sql)
+  end
+
+  def self.all()
+    sql = "SELECT * FROM screenings"
+    films = SqlRunner.run(sql)
+    return films.map { |film| Film.new(film) }
+  end
+
 end
