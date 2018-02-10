@@ -60,7 +60,8 @@ class Film
     )"
     values = [@id]
     most_popular_time = SqlRunner.run(sql, values)
-    return most_popular_time.map { |time| time }
+    screening = most_popular_time.map { |time| Screening.new(time) }
+    return screening.map { |start| start.start_time }
   end
 
   def self.delete_all()
